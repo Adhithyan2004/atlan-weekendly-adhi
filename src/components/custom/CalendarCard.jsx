@@ -44,7 +44,7 @@ export default function CalendarCard({ selectedDate, onSelect, activities }) {
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
         return isPast || !isWeekend;
       }}
-      className="w-1/3 border-1 rounded-lg h-fit"
+      className="w-1/2 border-1 rounded-lg h-fit"
       components={{
         DayButton: ({ day, modifiers, ...props }) => {
           const date = day?.date;

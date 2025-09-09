@@ -14,7 +14,7 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItem from "./SortableItem";
 
-export default function ActivityList({ activities, setActivities }) {
+export default function ActivityList({ activities, setActivities, onEdit }) {
   const sensors = useSensors(useSensor(PointerSensor));
 
   function handleDragEnd(event) {
@@ -54,6 +54,7 @@ export default function ActivityList({ activities, setActivities }) {
               id={item.id}
               item={item}
               onDelete={handleDelete}
+              onEdit={() => onEdit(item)}
             />
           ))}
         </div>
