@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { formatDateLocal, isWeekend } from "@/utils/date.utils";
+import { saveActivities, loadActivities } from "@/utils/storage.utils";
 import CalendarCard from "./CalendarCard";
 import ActivityForm from "./ActivityForm";
 import ActivityList from "./ActivityList";
@@ -19,25 +21,13 @@ export default function Hero() {
   const [selectTime, setSelectTime] = useState("10:00");
   const [editingActivity, setEditingActivity] = useState(null);
 
-  // Load first
   useEffect(() => {
-    const saved = localStorage.getItem("activities");
-    if (saved) setActivities(JSON.parse(saved));
+    setActivities(loadActivities());
   }, []);
 
-  // Save whenever activities change
   useEffect(() => {
-    localStorage.setItem("activities", JSON.stringify(activities));
+    saveActivities(activities);
   }, [activities]);
-
-  //  Restrict to weekends
-  function isWeekend(dateStr) {
-    if (!dateStr) return false;
-    const [y, m, d] = dateStr.split("-");
-    const dt = new Date(y, Number(m) - 1, d);
-    const day = dt.getDay();
-    return day === 0 || day === 6; // Sunday=0, Saturday=6
-  }
 
   //  Add activity
   function handleAddActivity() {
@@ -91,14 +81,6 @@ export default function Hero() {
     setSelectTime("10:00");
     setSelectedActivity("hiking");
     setSelectedMood("happy");
-  }
-
-  //  Convert Date -> YYYY-MM-DD
-  function formatDateLocal(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
   }
 
   //  Filter activities for the selected day
