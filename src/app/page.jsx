@@ -21,7 +21,7 @@ const Home = () => {
   }, [activities]);
 
   return (
-    <div className="h-screen flex flex-col justify-between bg-violet-400 relative">
+    <div className="h-screen flex flex-col justify-between bg-violet-300 relative">
       <AnimatePresence mode="wait">
         {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
       </AnimatePresence>
