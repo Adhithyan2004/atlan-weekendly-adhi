@@ -14,3 +14,18 @@
     const day = dt.getDay();
     return day === 0 || day === 6; // Sunday=0, Saturday=6
   }
+
+
+  export function reorderDate(dateStr) {
+  const [year, month, day] = dateStr.split("-");
+  return `${day}-${month}-${year}`;
+}
+
+export function formatTime12hr(time) {
+  if (!time) return "";
+  const [hourStr, minute] = time.split(":");
+  let hour = parseInt(hourStr, 10);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  hour = hour % 12 || 12; // convert 0 → 12, 13 → 1, etc.
+  return `${hour}:${minute} ${ampm}`;
+}

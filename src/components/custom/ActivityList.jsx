@@ -41,7 +41,7 @@ export default function ActivityList({ activities, setActivities, onEdit }) {
         items={activities.map((a) => a.id)} // just pass ids, cleaner
         strategy={verticalListSortingStrategy}
       >
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2 overflow-y-auto">
           {activities.length === 0 && (
             <p className="text-base px-6 text-gray-500 italic">
               No activities scheduled for this date.

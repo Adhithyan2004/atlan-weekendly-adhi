@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Trash2, Pencil } from "lucide-react";
 import { ACTIVITIES } from "@/app/datas/activitiesData";
+import { reorderDate, formatTime12hr } from "@/utils/date.utils";
 
 const moodColors = {
   happy: "bg-yellow-100 border-yellow-300",
@@ -12,23 +13,9 @@ const moodColors = {
   excited: "bg-pink-100 border-pink-300",
 };
 
-function formatTime12hr(time) {
-  if (!time) return "";
-  const [hourStr, minute] = time.split(":");
-  let hour = parseInt(hourStr, 10);
-  const ampm = hour >= 12 ? "PM" : "AM";
-  hour = hour % 12 || 12; // convert 0 → 12, 13 → 1, etc.
-  return `${hour}:${minute} ${ampm}`;
-}
-
 function getActivityLabel(id) {
   const found = ACTIVITIES.find((a) => a.id === id);
   return found ? found.label : id;
-}
-
-function reorderDate(dateStr) {
-  const [year, month, day] = dateStr.split("-");
-  return `${day}-${month}-${year}`;
 }
 
 const moodEmojis = {
@@ -51,7 +38,7 @@ export default function SortableItem({ id, item, onDelete, onEdit }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex items-center w-1/2 mx-6 justify-between p-2 rounded-md shadow-sm ${
+      className={`flex items-center w-72 mx-6 justify-between p-3 rounded-md shadow-sm ${
         moodColors[item.mood] || "bg-white border"
       }`}
     >

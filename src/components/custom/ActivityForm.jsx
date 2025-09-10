@@ -79,7 +79,16 @@ export default function ActivityForm({
       </div>
       <button
         className="px-4 py-2 bg-primary text-white rounded-md"
-        onClick={editingActivity ? handleUpdateActivity : handleAddActivity}
+        onClick={() => {
+          const updated = {
+            ...editingActivity,
+            date: selectedDate,
+            time: selectTime,
+            activity: selectedActivity,
+            mood: selectedMood,
+          };
+          editingActivity ? handleUpdateActivity(updated) : handleAddActivity();
+        }}
       >
         {editingActivity ? "Update Activity" : "Add Activity"}
       </button>

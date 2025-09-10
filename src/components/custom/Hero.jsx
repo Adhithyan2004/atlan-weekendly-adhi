@@ -35,6 +35,14 @@ export default function Hero() {
     if (!isWeekend(selectedDate)) return alert("Pick a weekend date");
     if (!selectTime) return alert("Pick a time");
 
+    //  check if activity with same date + time already exists
+    const exists = activities.some(
+      (a) => a.date === selectedDate && a.time === selectTime
+    );
+    if (exists) {
+      return alert("An activity already exists at this time for this date.");
+    }
+
     setActivities([
       ...activities,
       {
@@ -48,19 +56,10 @@ export default function Hero() {
   }
 
   //  Update activity
-  function handleUpdateActivity(id) {
+  function handleUpdateActivity(updated) {
+    console.log("Updating activity:", updated);
     setActivities((prev) =>
-      prev.map((a) =>
-        a.id === id
-          ? {
-              ...a,
-              date: selectedDate,
-              time: selectTime,
-              activity: selectedActivity,
-              mood: selectedMood,
-            }
-          : a
-      )
+      prev.map((a) => (a.id === updated.id ? updated : a))
     );
     setEditingActivity(null);
     resetForm();
@@ -77,7 +76,6 @@ export default function Hero() {
   }, [editingActivity]);
 
   function resetForm() {
-    setSelectedDate("");
     setSelectTime("10:00");
     setSelectedActivity("hiking");
     setSelectedMood("happy");
@@ -115,11 +113,7 @@ export default function Hero() {
           setSelectedMood={setSelectedMood}
           handleUpdateActivity={handleUpdateActivity}
           editingActivity={editingActivity}
-          handleAddActivity={
-            editingActivity
-              ? () => handleUpdateActivity(editingActivity.id)
-              : handleAddActivity
-          }
+          handleAddActivity={handleAddActivity}
           selectTime={selectTime}
           setSelectTime={setSelectTime}
           isEditing={!!editingActivity}
