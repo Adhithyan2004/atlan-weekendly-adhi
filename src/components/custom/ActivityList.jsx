@@ -38,7 +38,7 @@ export default function ActivityList({ activities, setActivities, onEdit }) {
       onDragEnd={handleDragEnd}
     >
       <SortableContext
-        items={activities.map((a) => a.id)} // just pass ids, cleaner
+        items={activities.map((a) => a.id)}
         strategy={rectSortingStrategy}
       >
         <div className="grid grid-cols-2 gap-3 px-4 py-3 overflow-y-auto">

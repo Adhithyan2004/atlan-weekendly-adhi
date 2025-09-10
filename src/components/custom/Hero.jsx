@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { formatDateLocal, isWeekend } from "@/utils/date.utils";
-import { saveActivities, loadActivities } from "@/utils/storage.utils";
 import CalendarCard from "./CalendarCard";
 import ActivityForm from "./ActivityForm";
 import ActivityList from "./ActivityList";
@@ -13,29 +12,19 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
-export default function Hero() {
+export default function Hero({ activities, setActivities }) {
   const [selectedDate, setSelectedDate] = useState("2025-09-13");
   const [selectedActivity, setSelectedActivity] = useState("hiking");
-  const [selectedMood, setSelectedMood] = useState("happy");
-  const [activities, setActivities] = useState([]);
   const [selectTime, setSelectTime] = useState("10:00");
   const [editingActivity, setEditingActivity] = useState(null);
 
-  useEffect(() => {
-    setActivities(loadActivities());
-  }, []);
+  // ✅ removed useEffect for localStorage (handled in Home.jsx)
 
-  useEffect(() => {
-    saveActivities(activities);
-  }, [activities]);
-
-  //  Add activity
   function handleAddActivity() {
     if (!selectedDate) return alert("Pick a date first");
     if (!isWeekend(selectedDate)) return alert("Pick a weekend date");
     if (!selectTime) return alert("Pick a time");
 
-    //  check if activity with same date + time already exists
     const exists = activities.some(
       (a) => a.date === selectedDate && a.time === selectTime
     );
@@ -50,14 +39,11 @@ export default function Hero() {
         time: selectTime,
         date: selectedDate,
         activity: selectedActivity,
-        mood: selectedMood,
       },
     ]);
   }
 
-  //  Update activity
   function handleUpdateActivity(updated) {
-    console.log("Updating activity:", updated);
     setActivities((prev) =>
       prev.map((a) => (a.id === updated.id ? updated : a))
     );
@@ -65,34 +51,34 @@ export default function Hero() {
     resetForm();
   }
 
-  //  Prefill form when editing
   useEffect(() => {
     if (editingActivity) {
       setSelectedDate(editingActivity.date);
       setSelectTime(editingActivity.time);
       setSelectedActivity(editingActivity.activity);
-      setSelectedMood(editingActivity.mood);
     }
   }, [editingActivity]);
 
   function resetForm() {
     setSelectTime("10:00");
     setSelectedActivity("hiking");
-    setSelectedMood("happy");
   }
 
-  //  Filter activities for the selected day
   const activitiesForDay = activities.filter((a) => a.date === selectedDate);
 
   return (
-    <div className="flex justify-between  px-20 py-10">
+    <div className="flex justify-between px-20 py-10">
       <CalendarCard
         selectedDate={selectedDate ? new Date(selectedDate) : undefined}
         onSelect={(date) => date && setSelectedDate(formatDateLocal(date))}
         activities={activities}
       />
 
-      <Card className="w-full bg-yellow-200 shadow-[7px_3px_0px_rgba(0,0,0,1)] flex-col ml-10">
+      <Card
+        className={`w-full shadow-[7px_3px_0px_rgba(0,0,0,1)] transition-colors duration-700 ease-in-out flex-col ml-10 ${
+          editingActivity ? "bg-cyan-200" : "bg-yellow-200"
+        }`}
+      >
         <CardHeader>
           <CardTitle>
             {editingActivity ? "Edit Activity" : "Enter Activity"}
@@ -109,8 +95,6 @@ export default function Hero() {
           setSelectedDate={setSelectedDate}
           selectedActivity={selectedActivity}
           setSelectedActivity={setSelectedActivity}
-          selectedMood={selectedMood}
-          setSelectedMood={setSelectedMood}
           handleUpdateActivity={handleUpdateActivity}
           editingActivity={editingActivity}
           handleAddActivity={handleAddActivity}
@@ -132,7 +116,7 @@ export default function Hero() {
                 return [...others, ...newDayList];
               });
             }}
-            onEdit={(item) => setEditingActivity(item)} //  edit handler
+            onEdit={(item) => setEditingActivity(item)}
           />
         )}
       </Card>
