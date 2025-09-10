@@ -38,7 +38,7 @@ export default function SortableItem({ id, item, onDelete, onEdit }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex items-center w-72 mx-6 justify-between p-3 rounded-md shadow-sm ${
+      className={`flex items-center shadow-[3px_3px_0px_rgba(0,0,0,1)] justify-between p-3  rounded-md  ${
         moodColors[item.mood] || "bg-white border"
       }`}
     >

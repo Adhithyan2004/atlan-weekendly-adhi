@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
 import SortableItem from "./SortableItem";
@@ -39,11 +39,11 @@ export default function ActivityList({ activities, setActivities, onEdit }) {
     >
       <SortableContext
         items={activities.map((a) => a.id)} // just pass ids, cleaner
-        strategy={verticalListSortingStrategy}
+        strategy={rectSortingStrategy}
       >
-        <div className="grid grid-cols-2 gap-2 overflow-y-auto">
+        <div className="grid grid-cols-2 gap-3 px-4 py-3 overflow-y-auto">
           {activities.length === 0 && (
-            <p className="text-base px-6 text-gray-500 italic">
+            <p className="text-base px-6 text-black italic">
               No activities scheduled for this date.
             </p>
           )}

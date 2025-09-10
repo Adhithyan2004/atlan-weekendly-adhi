@@ -85,14 +85,14 @@ export default function Hero() {
   const activitiesForDay = activities.filter((a) => a.date === selectedDate);
 
   return (
-    <div className="flex justify-between px-20 py-10">
+    <div className="flex justify-between  px-20 py-10">
       <CalendarCard
         selectedDate={selectedDate ? new Date(selectedDate) : undefined}
         onSelect={(date) => date && setSelectedDate(formatDateLocal(date))}
         activities={activities}
       />
 
-      <Card className="w-full flex-col ml-10">
+      <Card className="w-full bg-yellow-200 shadow-[7px_3px_0px_rgba(0,0,0,1)] flex-col ml-10">
         <CardHeader>
           <CardTitle>
             {editingActivity ? "Edit Activity" : "Enter Activity"}

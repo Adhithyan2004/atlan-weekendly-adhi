@@ -35,7 +35,7 @@ export default function CalendarCard({ selectedDate, onSelect, activities }) {
         hasActivity: activities.map((a) => normalizeDate(a.date)),
       }}
       modifiersClassNames={{
-        hasActivity: "bg-blue-200 rounded-md",
+        hasActivity: "bg-emerald-100 rounded-md",
       }}
       disabled={(date) => {
         const today = new Date();
@@ -44,7 +44,7 @@ export default function CalendarCard({ selectedDate, onSelect, activities }) {
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
         return isPast || !isWeekend;
       }}
-      className="w-1/2 border-1 rounded-lg h-fit"
+      className="w-1/2 bg-emerald-300 shadow-[7px_4px_0px_rgba(0,0,0,1)] border-1 rounded-lg h-fit"
       components={{
         DayButton: ({ day, modifiers, ...props }) => {
           const date = day?.date;
