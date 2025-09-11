@@ -10,7 +10,9 @@ import { saveActivities, loadActivities } from "@/utils/storage.utils";
 
 const Home = () => {
   const [activities, setActivities] = useState([]);
-  const [splashDone, setSplashDone] = useState(false);
+  const [splashDone, setSplashDone] = useState(
+    typeof window !== "undefined" && window.innerWidth < 640 ? true : false
+  );
 
   useEffect(() => {
     setActivities(loadActivities());
@@ -21,11 +23,17 @@ const Home = () => {
   }, [activities]);
 
   return (
-    <div className="h-screen flex flex-col justify-between bg-violet-300 relative">
+    <div className="2xl:h-screen h-full flex flex-col justify-between bg-violet-300 ">
+      {/* Splash screen only visible on sm+ screens */}
       <AnimatePresence mode="wait">
-        {!splashDone && <SplashScreen onFinish={() => setSplashDone(true)} />}
+        {!splashDone && (
+          <div className="hidden sm:flex absolute inset-0">
+            <SplashScreen onFinish={() => setSplashDone(true)} />
+          </div>
+        )}
       </AnimatePresence>
 
+      {/* Main app content */}
       {splashDone && (
         <>
           <Navbar />
