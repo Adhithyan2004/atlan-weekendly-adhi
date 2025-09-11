@@ -15,7 +15,13 @@ import {
 import SortableItem from "./SortableItem";
 
 export default function ActivityList({ activities, setActivities, onEdit }) {
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
 
   function handleDragEnd(event) {
     const { active, over } = event;
@@ -41,7 +47,7 @@ export default function ActivityList({ activities, setActivities, onEdit }) {
         items={activities.map((a) => a.id)}
         strategy={rectSortingStrategy}
       >
-        <div className="grid grid-cols-2 gap-3 px-4 py-3 overflow-y-auto">
+        <div className="grid 2xl:grid-cols-2 gap-2 px-3 py-3 overflow-y-auto">
           {activities.length === 0 && (
             <p className="text-base px-6 text-black italic">
               No activities scheduled for this date.

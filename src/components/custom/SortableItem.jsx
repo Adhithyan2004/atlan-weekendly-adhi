@@ -34,7 +34,7 @@ export default function SortableItem({ id, item, onDelete, onEdit }) {
         className="cursor-grab flex items-center gap-2"
       >
         <GripVertical className="w-4 h-4 text-gray-500" />
-        <span className="flex items-center gap-2">
+        <span className="flex text-sm items-center 2xl:gap-1 sm:gap-2">
           <strong>{reorderDate(item.date)}</strong> -{" "}
           <strong>{formatTime12hr(item.time)}</strong> - {details?.icon}
           <strong>{details?.label || item.activity}</strong>
@@ -42,7 +42,7 @@ export default function SortableItem({ id, item, onDelete, onEdit }) {
       </div>
 
       {/* Action buttons */}
-      <div className="flex gap-2">
+      <div className="flex ">
         <button
           onClick={() => onEdit(item)}
           className="p-1 hover:bg-blue-100 rounded-md"

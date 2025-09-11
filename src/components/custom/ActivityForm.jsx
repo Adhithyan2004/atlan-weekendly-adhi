@@ -17,7 +17,7 @@ export default function ActivityForm({
 }) {
   return (
     <CardContent className={`space-y-4 `}>
-      <div className="flex w-full gap-6">
+      <div className="flex flex-col lg:flex-row w-full  gap-6">
         <div className="LftCntr w-full">
           {/* Date Input */}
           <div className="flex flex-col mb-3 w-full">

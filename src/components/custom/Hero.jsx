@@ -67,7 +67,7 @@ export default function Hero({ activities, setActivities }) {
   const activitiesForDay = activities.filter((a) => a.date === selectedDate);
 
   return (
-    <div className="flex justify-between px-20 py-10">
+    <div className="flex flex-col gap-4 sm:gap-6 items-center lg:flex-row lg:justify-between px-6 lg:px-0 md:mx-16  sm:mx-12 xl:px-20 py-10">
       <CalendarCard
         selectedDate={selectedDate ? new Date(selectedDate) : undefined}
         onSelect={(date) => date && setSelectedDate(formatDateLocal(date))}
@@ -75,7 +75,7 @@ export default function Hero({ activities, setActivities }) {
       />
 
       <Card
-        className={`w-full shadow-[7px_3px_0px_rgba(0,0,0,1)] transition-colors duration-700 ease-in-out flex-col ml-10 ${
+        className={`w-full shadow-[7px_3px_0px_rgba(0,0,0,1)] transition-colors duration-700 ease-in-out flex-col xl:ml-10 ${
           editingActivity ? "bg-cyan-200" : "bg-yellow-200"
         }`}
       >
