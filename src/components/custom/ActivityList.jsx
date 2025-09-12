@@ -22,10 +22,12 @@ export default function ActivityList({
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
+      // dragging begins only if moved 5px preventing unwanted drags
       activationConstraint: { distance: 5 },
     })
   );
 
+  // Handle drag and drop and update in the UI
   function handleDragEnd(event) {
     const { active, over } = event;
     if (!over) return;
@@ -38,7 +40,7 @@ export default function ActivityList({
 
   function handleDelete(id) {
     setActivities(activities.filter((a) => a.id !== id));
-    if (onDelete) onDelete(id); //  tell parent what got deleted
+    if (onDelete) onDelete(id); //  tell parent what got deleted so that parent detects deleted activity beign edited
   }
 
   return (

@@ -17,19 +17,23 @@ export default function Hero({ activities, setActivities }) {
   const [selectedActivity, setSelectedActivity] = useState("hiking");
   const [selectTime, setSelectTime] = useState("10:00");
   const [editingActivity, setEditingActivity] = useState(null);
+  const [error, setError] = useState("");
+
 
   function handleAddActivity() {
-    if (!selectedDate) return alert("Pick a date first");
-    if (!isWeekend(selectedDate)) return alert("Pick a weekend date");
-    if (!selectTime) return alert("Pick a time");
-
+    if (!selectedDate) return setError("Pick a date first");
+    if (!isWeekend(selectedDate)) return setError("Pick a weekend date");
+    if (!selectTime) return setError("Pick a time");
+  
+    // check if an activity exist at same time
     const exists = activities.some(
       (a) => a.date === selectedDate && a.time === selectTime
     );
     if (exists) {
-      return alert("An activity already exists at this time for this date.");
+      return setError("An activity already exists at this time for this date.");
     }
 
+    
     setActivities([
       ...activities,
       {
@@ -50,6 +54,13 @@ export default function Hero({ activities, setActivities }) {
   }
 
   useEffect(() => {
+    if (error) {
+      setError("");
+    }
+  }, [selectedDate, selectTime, selectedActivity, activities]);
+
+  // This effect pre-fills form fields (date, time, activity) with the details of the activity being edited.
+  useEffect(() => {
     if (editingActivity) {
       setSelectedDate(editingActivity.date);
       setSelectTime(editingActivity.time);
@@ -57,11 +68,13 @@ export default function Hero({ activities, setActivities }) {
     }
   }, [editingActivity]);
 
+  // Reset form after updating an activity
   function resetForm() {
     setSelectTime("10:00");
     setSelectedActivity("hiking");
   }
 
+  // Show activites for the selected date
   const activitiesForDay = activities.filter((a) => a.date === selectedDate);
 
   return (
@@ -87,7 +100,7 @@ export default function Hero({ activities, setActivities }) {
               : "Fill the fields to enter a scheduled activity"}
           </CardDescription>
         </CardHeader>
-
+        {error && <div className="text-red-600 font-medium px-6 ">{error}</div>}
         <ActivityForm
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}

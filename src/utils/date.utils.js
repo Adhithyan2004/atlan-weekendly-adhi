@@ -21,7 +21,7 @@
   return `${day}-${month}-${year}`;
 }
 
-
+// Convert to 12hr format for better readability
 export function formatTime12hr(time) {
   if (!time) return "";
   const [hourStr, minute] = time.split(":");
@@ -30,3 +30,9 @@ export function formatTime12hr(time) {
   hour = hour % 12 || 12; // convert 0 → 12, 13 → 1, etc.
   return `${hour}:${minute} ${ampm}`;
 }
+
+export const normalizeDate = (date) => {
+    if (!date) return null;
+    const d = new Date(date);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  };
