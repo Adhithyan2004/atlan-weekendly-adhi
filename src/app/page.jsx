@@ -23,7 +23,7 @@ const Home = () => {
   }, [activities]);
 
   return (
-    <div className="2xl:h-screen h-full flex flex-col justify-between bg-violet-300 ">
+    <div className="2xl:h-full h-full flex flex-col justify-between 2xl:gap-11 bg-violet-300 ">
       {/* Splash screen only visible on sm+ screens */}
       <AnimatePresence mode="wait">
         {!splashDone && (

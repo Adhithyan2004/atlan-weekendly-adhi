@@ -14,18 +14,21 @@ import {
 } from "@dnd-kit/sortable";
 import SortableItem from "./SortableItem";
 
-export default function ActivityList({ activities, setActivities, onEdit }) {
+export default function ActivityList({
+  activities,
+  setActivities,
+  onEdit,
+  onDelete,
+}) {
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
+      activationConstraint: { distance: 5 },
     })
   );
 
   function handleDragEnd(event) {
     const { active, over } = event;
-    if (!over) return; // handle case where item is dropped outside list
+    if (!over) return;
     if (active.id !== over.id) {
       const oldIndex = activities.findIndex((a) => a.id === active.id);
       const newIndex = activities.findIndex((a) => a.id === over.id);
@@ -35,6 +38,7 @@ export default function ActivityList({ activities, setActivities, onEdit }) {
 
   function handleDelete(id) {
     setActivities(activities.filter((a) => a.id !== id));
+    if (onDelete) onDelete(id); //  tell parent what got deleted
   }
 
   return (

@@ -18,8 +18,6 @@ export default function Hero({ activities, setActivities }) {
   const [selectTime, setSelectTime] = useState("10:00");
   const [editingActivity, setEditingActivity] = useState(null);
 
-  // ✅ removed useEffect for localStorage (handled in Home.jsx)
-
   function handleAddActivity() {
     if (!selectedDate) return alert("Pick a date first");
     if (!isWeekend(selectedDate)) return alert("Pick a weekend date");
@@ -106,7 +104,6 @@ export default function Hero({ activities, setActivities }) {
             resetForm();
           }}
         />
-
         {selectedDate && (
           <ActivityList
             activities={activitiesForDay}
@@ -117,6 +114,13 @@ export default function Hero({ activities, setActivities }) {
               });
             }}
             onEdit={(item) => setEditingActivity(item)}
+            onDelete={(id) => {
+              //  if the deleted item is being edited, reset form + edit mode
+              if (editingActivity?.id === id) {
+                setEditingActivity(null);
+                resetForm();
+              }
+            }}
           />
         )}
       </Card>

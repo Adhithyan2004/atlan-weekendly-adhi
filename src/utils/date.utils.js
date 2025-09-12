@@ -6,7 +6,7 @@
     return `${year}-${month}-${day}`;
   }
 
-   //  Restrict to weekends
+   //  Restrict users to select only weekends
   export function isWeekend(dateStr) {
     if (!dateStr) return false;
     const [y, m, d] = dateStr.split("-");
@@ -15,11 +15,12 @@
     return day === 0 || day === 6; // Sunday=0, Saturday=6
   }
 
-
+// Convert YYYY-MM-DD to DD-MM-YYYY for disaply purposes
   export function reorderDate(dateStr) {
   const [year, month, day] = dateStr.split("-");
   return `${day}-${month}-${year}`;
 }
+
 
 export function formatTime12hr(time) {
   if (!time) return "";
