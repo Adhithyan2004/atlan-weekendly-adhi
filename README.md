@@ -18,7 +18,7 @@ Data: Local state (in-memory, extendable to backend later)
 ## Getting Started
 
 1. Clone the repository
-git clone https://ghttps://github.com/Adhithyan2004/atlan-weekendly-adhi.git
+git clone https://github.com/Adhithyan2004/atlan-weekendly-adhi.git
 cd weekendly
 
 2. Install dependencies
