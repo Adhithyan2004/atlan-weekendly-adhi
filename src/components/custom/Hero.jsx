@@ -19,12 +19,11 @@ export default function Hero({ activities, setActivities }) {
   const [editingActivity, setEditingActivity] = useState(null);
   const [error, setError] = useState("");
 
-
   function handleAddActivity() {
     if (!selectedDate) return setError("Pick a date first");
     if (!isWeekend(selectedDate)) return setError("Pick a weekend date");
     if (!selectTime) return setError("Pick a time");
-  
+
     // check if an activity exist at same time
     const exists = activities.some(
       (a) => a.date === selectedDate && a.time === selectTime
@@ -33,7 +32,6 @@ export default function Hero({ activities, setActivities }) {
       return setError("An activity already exists at this time for this date.");
     }
 
-    
     setActivities([
       ...activities,
       {
@@ -45,6 +43,7 @@ export default function Hero({ activities, setActivities }) {
     ]);
   }
 
+  // Updates data by relopping the id and updating the changed fields
   function handleUpdateActivity(updated) {
     setActivities((prev) =>
       prev.map((a) => (a.id === updated.id ? updated : a))
@@ -52,7 +51,7 @@ export default function Hero({ activities, setActivities }) {
     setEditingActivity(null);
     resetForm();
   }
-
+  // clearing error message if any of the data cahnges
   useEffect(() => {
     if (error) {
       setError("");

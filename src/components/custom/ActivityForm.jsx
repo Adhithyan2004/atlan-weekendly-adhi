@@ -1,7 +1,7 @@
 "use client";
 
 import { CardContent } from "@/components/ui/card";
-import { ACTIVITIES } from "@/app/datas/activitiesData";
+import { ACTIVITIES } from "@/datas/activitiesData";
 import { CalendarDays, Heart, Clock } from "lucide-react";
 
 export default function ActivityForm({
@@ -27,6 +27,7 @@ export default function ActivityForm({
             </label>
             <input
               type="date"
+              // Cannot take past dates in input
               min={new Date().toISOString().split("T")[0]}
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}

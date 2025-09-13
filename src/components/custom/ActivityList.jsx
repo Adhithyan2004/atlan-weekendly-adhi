@@ -55,7 +55,7 @@ export default function ActivityList({
       >
         <div className="grid 2xl:grid-cols-2 gap-2 px-3 py-3 overflow-y-auto">
           {activities.length === 0 && (
-            <p className="text-base px-6 text-black italic">
+            <p className="text-base px-6 text-black font-semibold italic">
               No activities scheduled for this date.
             </p>
           )}

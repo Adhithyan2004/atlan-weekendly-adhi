@@ -31,14 +31,14 @@ export default function CalendarCard({ selectedDate, onSelect, activities }) {
         const isWeekend = date.getDay() === 0 || date.getDay() === 6;
         return isPast || !isWeekend;
       }}
-      className="2xl:w-1/2 h-[50vh] sm:w-full sm:h-full w-full bg-emerald-300 shadow-[7px_4px_0px_rgba(0,0,0,1)] border-2 rounded-lg "
+      className="2xl:w-1/2 h-[50vh] sm:w-full sm:h-full w-full bg-emerald-300 shadow-[7px_4px_0px_rgba(0,0,0,1)] border-2 rounded-lg"
       components={{
         DayButton: ({ day, modifiers, ...props }) => {
           const date = day?.date;
           if (!date) return null;
 
           const taskCount = getTaskCount(date);
-
+  
           return (
             <button
               {...props}

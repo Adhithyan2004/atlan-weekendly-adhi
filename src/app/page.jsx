@@ -8,12 +8,14 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { saveActivities, loadActivities } from "@/utils/storage.utils";
 
+// Passing activites as props to handle render issue
 const Home = () => {
   const [activities, setActivities] = useState([]);
   const [splashDone, setSplashDone] = useState(
     typeof window !== "undefined" && window.innerWidth < 640 ? true : false
   );
 
+  // getting activites from localstorage after splash animation
   useEffect(() => {
     setActivities(loadActivities());
   }, []);

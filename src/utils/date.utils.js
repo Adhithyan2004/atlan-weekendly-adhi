@@ -31,6 +31,7 @@ export function formatTime12hr(time) {
   return `${hour}:${minute} ${ampm}`;
 }
 
+// Remove time from Date
 export const normalizeDate = (date) => {
     if (!date) return null;
     const d = new Date(date);

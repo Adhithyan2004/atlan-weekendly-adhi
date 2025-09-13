@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Trash2, Pencil } from "lucide-react";
-import { ACTIVITIES } from "@/app/datas/activitiesData";
+import { ACTIVITIES } from "@/datas/activitiesData";
 import { reorderDate, formatTime12hr } from "@/utils/date.utils";
 
 function getActivityDetails(id) {
