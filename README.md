@@ -18,11 +18,16 @@ Data: Local state (in-memory, extendable to backend later)
 ## Getting Started
 
 1. Clone the repository
+```bash
 git clone https://github.com/Adhithyan2004/atlan-weekendly-adhi.git
-cd weekendly
+cd dev-juice
+```
 
-2. Install dependencies
+3. Install dependencies
+```bash
 npm install
-
-3. Run the development server
+```
+5. Run the development server
+```bash
 npm run dev
+```
