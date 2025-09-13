@@ -23,11 +23,11 @@ git clone https://github.com/Adhithyan2004/atlan-weekendly-adhi.git
 cd dev-juice
 ```
 
-3. Install dependencies
+2. Install dependencies
 ```bash
 npm install
 ```
-5. Run the development server
+3. Run the development server
 ```bash
 npm run dev
 ```
