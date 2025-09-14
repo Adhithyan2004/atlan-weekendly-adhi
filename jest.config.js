@@ -1,3 +1,4 @@
+// jest.config.js
 module.exports = {
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
@@ -5,6 +6,6 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   transform: {
-    "^.+\\.[jt]sx?$": "babel-jest", //  JSX handled here
+    "^.+\\.[jt]sx?$": ["babel-jest", { configFile: "./babel-jest.config.js" }],
   },
 };
