@@ -21,12 +21,13 @@ export default function ActivityForm({
         <div className="LftCntr w-full">
           {/* Date Input */}
           <div className="flex flex-col mb-3 w-full">
-            <label className="mb-1 flex gap-2 font-bold">
+            <label htmlFor="date-input" className="mb-1 flex gap-2 font-bold">
               <CalendarDays />
               Date
             </label>
             <input
               type="date"
+              id="date-input"
               // Cannot take past dates in input
               min={new Date().toISOString().split("T")[0]}
               value={selectedDate}
@@ -36,11 +37,12 @@ export default function ActivityForm({
           </div>
           {/* Time Entry */}
           <div className="flex flex-col  w-full">
-            <label className="mb-1 flex gap-2 font-bold">
+            <label htmlFor="time-input" className="mb-1 flex gap-2 font-bold">
               <Clock />
               Time
             </label>
             <input
+              id="time-input"
               type="time"
               value={selectTime}
               onChange={(e) => {
@@ -53,11 +55,15 @@ export default function ActivityForm({
         <div className="RgtCntr w-full">
           {/* Activity Dropdown */}
           <div className="flex flex-col mb-3 w-full">
-            <label className="mb-1 flex gap-2 font-bold">
+            <label
+              htmlFor="activity-select"
+              className="mb-1 flex gap-2 font-bold"
+            >
               <Heart />
               Activity
             </label>
             <select
+              id="activity-select"
               value={selectedActivity}
               onChange={(e) => setSelectedActivity(e.target.value)}
               className={`border-2 p-2 rounded-sm transition-colors duration-700 ease-in-out  ${

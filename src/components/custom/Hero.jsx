@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 
 export default function Hero({ activities, setActivities }) {
-  const [selectedDate, setSelectedDate] = useState("2025-09-13");
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedActivity, setSelectedActivity] = useState("hiking");
   const [selectTime, setSelectTime] = useState("10:00");
   const [editingActivity, setEditingActivity] = useState(null);
@@ -39,7 +39,7 @@ export default function Hero({ activities, setActivities }) {
         time: selectTime,
         date: selectedDate,
         activity: selectedActivity,
-      },
+      },  
     ]);
   }
 
